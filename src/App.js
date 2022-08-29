@@ -1,10 +1,13 @@
 
 import './App.css';
-import {useState} from "react";
+import { useState } from "react";
 import Tooltip from "./tooltip";
 function App() {
 
-    const [ steps, setSteps] = useState([
+    const color = 'green'
+    const [startTooltip, setTooltip] = useState(false)
+    const [steps, setSteps] = useState(
+        [
             {
                 content: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
                 locale: { skip: <strong aria-label="skip">Skip</strong> },
@@ -35,24 +38,29 @@ function App() {
             }
         ],
     );
+    const handleClickStart = (event) => {
+        event.preventDefault();
+        setTooltip(true);
+    };
 
-  return (
-    <div className="App">
-        <Tooltip steps={steps} />
-        <div className='form-group'>
-            <label>Starting Amount</label><br />
-            <input className='form-control step1' value='1000'/><br />
+    return (
+        <div className="App">
+            <button className='startTourBtn' onClick={handleClickStart}>Start Tour</button>
+            <Tooltip steps={steps} backgroundColor={color} startTooltip={startTooltip} />
+            <div className='form-group'>
+                <label>Starting Amount</label><br />
+                <input className='form-control step1' value='1000' /><br />
+            </div>
+            <div className='form-group'>
+                <label>Starting Amount</label><br />
+                <input className='form-control step2' value='1000' /><br />
+            </div>
+            <div className='form-group'>
+                <label>Starting Amount</label><br />
+                <input className='form-control step3' value='1000' />
+            </div>
         </div>
-        <div className='form-group'>
-            <label>Starting Amount</label><br />
-            <input className='form-control step2' value='1000'/><br />
-        </div>
-        <div className='form-group'>
-            <label>Starting Amount</label><br />
-            <input className='form-control step3' value='1000'/>
-        </div>
-    </div>
-  );
+    );
 }
 
 export default App;
